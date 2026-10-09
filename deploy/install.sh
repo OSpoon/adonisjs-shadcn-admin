@@ -124,9 +124,7 @@ cd "$INSTALL_DIR"
 printf 'Pulling adonisjs-shadcn-admin images...\n'
 if ! run_docker compose --env-file .env -f compose.yml pull; then
   cat >&2 <<EOF
-adonisjs-shadcn-admin images could not be pulled. If the GHCR packages are private, authenticate first:
-  docker login ghcr.io -u YOUR_GITHUB_USERNAME
-Use a GitHub token with read:packages permission, then rerun this installer.
+The configured images could not be pulled. Check IMAGE_NAMESPACE, IMAGE_TAG, network connectivity, and registry access.
 The Compose files and .env were kept in: $INSTALL_DIR
 EOF
   exit 1

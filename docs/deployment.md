@@ -41,12 +41,7 @@ same tag. Set `ASA_CONFIG_REF` only when the config ref needs to differ from
 the image tag. The installer preserves an existing `.env` when rerun.
 
 The published GHCR images are public, so Docker can pull them without registry
-authentication. For a private fork or private image namespace, authenticate
-with a GitHub token that has `read:packages` permission:
-
-```sh
-docker login ghcr.io -u YOUR_GITHUB_USERNAME
-```
+authentication.
 
 To review the installer before running it, download
 `deploy/install.sh` from the repository and inspect it first. The installer

@@ -27,11 +27,7 @@ curl -fsSL https://raw.githubusercontent.com/OSpoon/adonisjs-shadcn-admin/main/d
 
 `ASA_INSTALL_DIR`、`ASA_HTTP_PORT`、`ASA_APP_URL`、`ASA_IMAGE_TAG` 和 `ASA_IMAGE_NAMESPACE` 分别用于设置安装目录、公开 URL、端口和镜像。设置镜像 tag 后，安装器会从同一个 tag 下载 Compose 文件。只有在配置版本需要与镜像 tag 不同时才设置 `ASA_CONFIG_REF`。再次运行安装器时，现有 `.env` 会保留。
 
-GHCR 镜像为公开包，Docker 无需登录即可拉取。私有 fork 或私有镜像仓库需要使用具备 `read:packages` 权限的 GitHub token 登录：
-
-```sh
-docker login ghcr.io -u YOUR_GITHUB_USERNAME
-```
+GHCR 镜像为公开包，Docker 无需登录即可拉取。
 
 运行前可先下载并检查仓库中的 `deploy/install.sh`。安装器不会替你安装 Docker。
 
