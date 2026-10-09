@@ -95,7 +95,7 @@ Backend tests use a separate SQLite database at `apps/backend/tmp/db.test.sqlite
 
 ## CI and releases
 
-Pull requests and pushes to `main` run the quality checks in GitHub Actions. A pushed `v*` tag publishes backend and frontend images to GitHub Container Registry. Create a release with `pnpm release`; review its version changes and generated changelog before pushing the release commit and tag. The workflow publishes images but does not deploy them to a server automatically.
+Pull requests and pushes to `main` run the quality checks in GitHub Actions. A pushed `v*` tag runs the checks, publishes backend and frontend images to GitHub Container Registry, then creates a GitHub Release with generated release notes. Create a release with `pnpm release`; review its version changes and generated changelog before pushing the release commit and tag. The workflow does not deploy images to a server automatically.
 
 See [development and release instructions](docs/development.md) and the [deployment guide](docs/deployment.md) for the full process.
 

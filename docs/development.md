@@ -71,8 +71,10 @@ configured Git remote:
 git push origin main --follow-tags
 ```
 
-A pushed `v*` tag runs CI and publishes the backend and frontend images to
-GitHub Container Registry. Do not edit generated changelog entries by hand.
+A pushed `v*` tag runs CI, publishes the backend and frontend images to GitHub
+Container Registry, then creates a GitHub Release with automatically generated
+release notes. The release is created only after both images publish
+successfully. Do not edit generated changelog entries by hand.
 
 ## Git hooks
 

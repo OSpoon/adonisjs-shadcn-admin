@@ -8,7 +8,8 @@ mounts a named volume at `/app/tmp` and runs database migrations at startup.
 
 The GitHub Actions workflow runs checks for pushes and pull requests to
 `main`. When a `v*` tag is pushed, it publishes backend and frontend images to
-GitHub Container Registry after verification succeeds:
+GitHub Container Registry after verification succeeds, then creates a GitHub
+Release with generated release notes:
 
 - `ghcr.io/<owner>/<repository>-backend:<tag>`
 - `ghcr.io/<owner>/<repository>-frontend:<tag>`
