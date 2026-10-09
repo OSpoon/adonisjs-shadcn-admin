@@ -1,7 +1,7 @@
 /* eslint-disable react-refresh/only-export-components */
 import { createFileRoute, Outlet } from '@tanstack/react-router'
-import { ClerkProvider } from '@clerk/react'
 import { ExternalLink, Key } from 'lucide-react'
+import { CLERK_PUBLISHABLE_KEY } from '@/lib/runtime-config'
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
 import { Separator } from '@/components/ui/separator'
 import { SidebarTrigger } from '@/components/ui/sidebar'
@@ -15,25 +15,12 @@ export const Route = createFileRoute('/clerk')({
 })
 
 // Import your Publishable Key
-const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY
-
 function RouteComponent() {
-  if (!PUBLISHABLE_KEY) {
+  if (!CLERK_PUBLISHABLE_KEY) {
     return <MissingClerkPubKey />
   }
 
-  return (
-    <ClerkProvider
-      publishableKey={PUBLISHABLE_KEY}
-      afterSignOutUrl='/clerk/sign-in'
-      signInUrl='/clerk/sign-in'
-      signUpUrl='/clerk/sign-up'
-      signInFallbackRedirectUrl='/clerk/user-management'
-      signUpFallbackRedirectUrl='/clerk/user-management'
-    >
-      <Outlet />
-    </ClerkProvider>
-  )
+  return <Outlet />
 }
 
 function MissingClerkPubKey() {
@@ -108,23 +95,18 @@ function MissingClerkPubKey() {
           <Separator className='my-4 w-full' />
 
           <Alert>
-            <AlertTitle>Clerk Integration is Optional</AlertTitle>
+            <AlertTitle>
+              Clerk is an Optional Authentication Provider
+            </AlertTitle>
             <AlertDescription>
               <p className='text-balance'>
-                The Clerk integration lives entirely inside{' '}
-                <code className={codeBlock}>src/routes/clerk</code>. If you plan
-                to use Clerk as your auth service, you might want to place{' '}
-                <code className={codeBlock}>ClerkProvider</code> at the root
-                route.
+                Clerk can be used alongside the built-in AdonisJS sign-in. Set
+                both the frontend publishable key and backend secret key to
+                authenticate API requests with a Clerk session.
               </p>
               <p>
-                However, if you don't plan to use Clerk, you can safely remove
-                this directory and related dependency_{' '}
-                <code className={codeBlock}>@clerk/react</code>.
-              </p>
-              <p className='mt-2 text-sm'>
-                This setup is modular by design and won't affect the rest of the
-                application.
+                After signing in, the backend verifies your Clerk session and
+                links the identity to a local SQLite user.
               </p>
             </AlertDescription>
           </Alert>

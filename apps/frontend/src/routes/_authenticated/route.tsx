@@ -1,14 +1,18 @@
 import { createFileRoute, redirect } from '@tanstack/react-router'
-import { useAuthStore } from '@/stores/auth-store'
+import { useAuthStore, waitForClerkAuthLoaded } from '@/stores/auth-store'
 import { authApi } from '@/lib/api'
 import { AuthenticatedLayout } from '@/components/layout/authenticated-layout'
 
 export const Route = createFileRoute('/_authenticated')({
   beforeLoad: async ({ location }) => {
+    await waitForClerkAuthLoaded()
     const { auth } = useAuthStore.getState()
-    if (!auth.accessToken) {
+    const signInRoute =
+      auth.provider === 'clerk' ? '/clerk/sign-in' : '/sign-in'
+
+    if (auth.provider !== 'clerk' && !auth.accessToken) {
       throw redirect({
-        to: '/sign-in',
+        to: signInRoute,
         search: { redirect: location.href },
       })
     }
@@ -20,7 +24,7 @@ export const Route = createFileRoute('/_authenticated')({
     } catch {
       auth.reset()
       throw redirect({
-        to: '/sign-in',
+        to: signInRoute,
         search: { redirect: location.href },
       })
     }

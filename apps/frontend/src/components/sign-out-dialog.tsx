@@ -1,6 +1,7 @@
 import { useNavigate, useLocation } from '@tanstack/react-router'
 import { useAuthStore } from '@/stores/auth-store'
 import { authApi } from '@/lib/api'
+import { signOutOfClerk } from '@/lib/clerk-session'
 import { ConfirmDialog } from '@/components/confirm-dialog'
 
 interface SignOutDialogProps {
@@ -14,10 +15,18 @@ export function SignOutDialog({ open, onOpenChange }: SignOutDialogProps) {
   const { auth } = useAuthStore()
 
   const handleSignOut = async () => {
-    try {
-      await authApi.logout()
-    } catch {
-      // Clear the local session even if the API token has already expired.
+    if (auth.provider === 'clerk') {
+      try {
+        await signOutOfClerk()
+      } catch {
+        // Clear the local profile even if Clerk has already expired the session.
+      }
+    } else {
+      try {
+        await authApi.logout()
+      } catch {
+        // Clear the local session even if the API token has already expired.
+      }
     }
     auth.reset()
     // Preserve current location for redirect after sign-in

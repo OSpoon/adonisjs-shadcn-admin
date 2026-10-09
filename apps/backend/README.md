@@ -25,13 +25,15 @@ The API listens on `http://localhost:3333`. The development database is `apps/ba
 
 ## Configuration
 
-| Variable                  | Purpose                                                                                                 |
-| ------------------------- | ------------------------------------------------------------------------------------------------------- |
-| `APP_KEY`                 | Required AdonisJS encryption key. Generate a private key for each environment.                          |
-| `HOST`, `PORT`, `APP_URL` | Bind address, port, and application URL. Defaults are `localhost`, `3333`, and `http://localhost:3333`. |
-| `LOG_LEVEL`               | Application log verbosity.                                                                              |
-| `SESSION_DRIVER`          | Session storage driver; local development defaults to `cookie`.                                         |
-| `CORS_ORIGIN`             | Optional allowed origins for a frontend hosted on a separate origin.                                    |
+| Variable                   | Purpose                                                                                                       |
+| -------------------------- | ------------------------------------------------------------------------------------------------------------- |
+| `APP_KEY`                  | Required AdonisJS encryption key. Generate a private key for each environment.                                |
+| `HOST`, `PORT`, `APP_URL`  | Bind address, port, and application URL. Defaults are `localhost`, `3333`, and `http://localhost:3333`.       |
+| `LOG_LEVEL`                | Application log verbosity.                                                                                    |
+| `SESSION_DRIVER`           | Session storage driver; local development defaults to `cookie`.                                               |
+| `CORS_ORIGIN`              | Optional allowed origins for a frontend hosted on a separate origin.                                          |
+| `CLERK_SECRET_KEY`         | Optional Clerk Backend API key. Enables Clerk session verification and local user linking.                    |
+| `CLERK_AUTHORIZED_PARTIES` | Optional comma-separated frontend origins checked against Clerk's `azp` token claim. Configure in production. |
 
 SQLite is the configured local and single-container database. Its path is set in `config/database.ts`; test mode selects the isolated test database automatically.
 
@@ -48,7 +50,7 @@ SQLite is the configured local and single-container database. Its path is set in
 | Chats           | `GET/POST /api/v1/chats`, `POST /api/v1/chats/:id/messages`                                                                             |
 | Dashboard       | `GET /api/v1/dashboard`                                                                                                                 |
 
-Sign-up and login return an access token. Protected routes require it as a bearer token. The directory records, integrations, tasks, and conversations loaded by the seeder are demo data; integration state does not configure external services or send email.
+AdonisJS sign-up and login return an access token. Protected routes accept that token or, when Clerk is configured, a verified Clerk session token. Clerk identities are linked to local `users` records by Clerk user ID; verified primary email addresses can link an existing local account. The directory records, integrations, tasks, and conversations loaded by the seeder are demo data; integration state does not configure external services or send email.
 
 ## Backend commands
 

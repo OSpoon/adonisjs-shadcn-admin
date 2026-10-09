@@ -16,6 +16,39 @@ GitHub Container Registry after verification succeeds:
 ## First deployment
 
 On the deployment host, install Docker Engine and the Docker Compose plugin.
+For an interactive-free setup with defaults, run the remote installer:
+
+```sh
+curl -fsSL https://raw.githubusercontent.com/OSpoon/adonisjs-shadcn-admin/main/deploy/install.sh | sh
+```
+
+It downloads the Compose configuration, creates `.env` with a generated
+`APP_KEY`, pulls the images, and starts both services. It installs under
+`/opt/asa` when run as root, or `~/asa` otherwise. Set first-install options
+on the `sh` side of the pipe, for example:
+
+```sh
+curl -fsSL https://raw.githubusercontent.com/OSpoon/adonisjs-shadcn-admin/main/deploy/install.sh | ASA_HTTP_PORT=8081 sh
+```
+
+`ASA_INSTALL_DIR`, `ASA_HTTP_PORT`, `ASA_APP_URL`, `ASA_IMAGE_TAG`, and
+`ASA_IMAGE_NAMESPACE` change the install path, public URL, port, and image selection.
+When setting an image tag, the installer downloads Compose files from that
+same tag. Set `ASA_CONFIG_REF` only when the config ref needs to differ from
+the image tag. The installer preserves an existing `.env` when rerun.
+
+The published GHCR images are public, so Docker can pull them without registry
+authentication. For a private fork or private image namespace, authenticate
+with a GitHub token that has `read:packages` permission:
+
+```sh
+docker login ghcr.io -u YOUR_GITHUB_USERNAME
+```
+
+To review the installer before running it, download
+`deploy/install.sh` from the repository and inspect it first. The installer
+does not install Docker itself.
+
 Copy `deploy/.env.example` to `deploy/.env`, then set:
 
 - `IMAGE_NAMESPACE` to the lowercase `ghcr.io/<owner>/<repository>` prefix
@@ -23,9 +56,10 @@ Copy `deploy/.env.example` to `deploy/.env`, then set:
 - `APP_KEY` to a generated, private, stable AdonisJS key
 - `APP_URL` to the public site URL
 - `HTTP_PORT` to the port exposed to the host
+- `CLERK_PUBLISHABLE_KEY` and `CLERK_SECRET_KEY` to enable the optional Clerk provider
+- `CLERK_AUTHORIZED_PARTIES` to the public frontend origin, for example `https://admin.example.com`
 
-For a private GHCR package, authenticate the host with a read-only package
-token before pulling images. Then start the services:
+Start the services:
 
 ```sh
 docker compose --env-file deploy/.env -f deploy/compose.yml pull

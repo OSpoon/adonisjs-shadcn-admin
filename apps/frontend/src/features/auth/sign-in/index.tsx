@@ -8,6 +8,7 @@ import {
   CardTitle,
 } from '@/components/ui/card'
 import { AuthLayout } from '../auth-layout'
+import { ClerkAuthLink } from '../clerk-auth-link'
 import { UserAuthForm } from './components/user-auth-form'
 
 export function SignIn() {
@@ -32,6 +33,9 @@ export function SignIn() {
         </CardHeader>
         <CardContent>
           <UserAuthForm redirectTo={redirect} />
+          <div className='mt-4'>
+            <ClerkAuthLink mode='sign-in' />
+          </div>
         </CardContent>
         <CardFooter>
           <p className='px-8 text-center text-sm text-muted-foreground'>

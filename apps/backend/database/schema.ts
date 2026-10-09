@@ -177,8 +177,18 @@ export class UserSettingSchema extends BaseModel {
 }
 
 export class UserSchema extends BaseModel {
-  static $columns = ['createdAt', 'email', 'fullName', 'id', 'password', 'updatedAt'] as const
+  static $columns = [
+    'clerkUserId',
+    'createdAt',
+    'email',
+    'fullName',
+    'id',
+    'password',
+    'updatedAt',
+  ] as const
   $columns = UserSchema.$columns
+  @column()
+  declare clerkUserId: string | null
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
   @column()

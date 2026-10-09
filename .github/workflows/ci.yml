@@ -48,6 +48,9 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
+      - name: Check deployment installer syntax
+        run: sh -n deploy/install.sh
+
       - name: Check pull request commit messages
         if: github.event_name == 'pull_request'
         run: pnpm exec commitlint --from "${{ github.event.pull_request.base.sha }}" --to "${{ github.sha }}" --verbose

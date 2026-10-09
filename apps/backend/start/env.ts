@@ -24,4 +24,8 @@ export default await Env.create(new URL('../', import.meta.url), {
 
   // Session
   SESSION_DRIVER: Env.schema.enum(['cookie', 'memory', 'database'] as const),
+
+  // Optional Clerk authentication
+  CLERK_SECRET_KEY: Env.schema.string.optional(),
+  CLERK_AUTHORIZED_PARTIES: Env.schema.string.optional(),
 })

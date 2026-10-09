@@ -51,6 +51,7 @@ ENTRYPOINT ["node", "docker-entrypoint.mjs"]
 
 FROM nginx:1.29-alpine AS frontend
 COPY --from=build /workspace/apps/frontend/dist/ /usr/share/nginx/html/
+COPY deploy/runtime-config.js.template /etc/nginx/templates/runtime-config.js.template
 COPY deploy/nginx.conf /etc/nginx/conf.d/default.conf
 EXPOSE 80
 HEALTHCHECK --interval=30s --timeout=5s --start-period=5s --retries=3 \

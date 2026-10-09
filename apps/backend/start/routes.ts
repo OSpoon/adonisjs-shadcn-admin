@@ -29,7 +29,7 @@ router
     router.patch('settings/:section', [controllers.Settings, 'update'])
   })
   .prefix('/api/v1/account')
-  .use(middleware.auth())
+  .use(middleware.auth({ guards: ['api', 'clerk'] }))
 
 router
   .group(() => {
@@ -59,4 +59,4 @@ router
     router.get('dashboard', [controllers.Dashboard, 'show'])
   })
   .prefix('/api/v1')
-  .use(middleware.auth())
+  .use(middleware.auth({ guards: ['api', 'clerk'] }))

@@ -8,6 +8,7 @@ import {
   CardTitle,
 } from '@/components/ui/card'
 import { AuthLayout } from '../auth-layout'
+import { ClerkAuthLink } from '../clerk-auth-link'
 import { SignUpForm } from './components/sign-up-form'
 
 export function SignUp() {
@@ -31,6 +32,9 @@ export function SignUp() {
         </CardHeader>
         <CardContent>
           <SignUpForm />
+          <div className='mt-4'>
+            <ClerkAuthLink mode='sign-up' />
+          </div>
         </CardContent>
         <CardFooter>
           <p className='px-8 text-center text-sm text-muted-foreground'>

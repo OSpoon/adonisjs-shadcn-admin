@@ -4,13 +4,14 @@ A full-stack admin starter that pairs the [shadcn-admin](https://github.com/satn
 
 ## Features
 
-- Upstream dashboard pages and interactions, including the responsive sidebar, command search, themes, RTL layout, tables, dialogs, and settings.
+- Admin dashboard with a responsive sidebar, command search, themes, RTL layout, tables, dialogs, and settings.
 - AdonisJS API for sign-up, sign-in, profile, tasks, directory users, integrations, chats, dashboard data, and account preferences.
+- Optional Clerk sign-in alongside native AdonisJS authentication, with Clerk sessions verified by the API and linked to SQLite users.
 - SQLite persistence through Lucid migrations and seeders.
 - Shared lint, formatting, TypeScript, test, and build checks, with Git hooks and GitHub Actions CI.
 - Docker Compose deployment with persistent SQLite storage and health checks.
 
-The frontend is the primary UI foundation. Its original template features remain available, while the listed data areas use the local API. Integration cards and seeded directory records are demonstration data; connecting a card does not configure an external service or send invitation email.
+Dashboard profile, task, directory-user, integration, chat, and account views use the local API. Integration cards and seeded directory records are demonstration data; connecting a card does not configure an external service or send invitation email.
 
 ## Quick start
 
@@ -51,15 +52,32 @@ The local database is `apps/backend/tmp/db.sqlite3`. The seed command adds 100 t
 
 ## Configuration
 
-| File                 | Setting                                      | Purpose                                                                                                        |
-| -------------------- | -------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
-| `apps/backend/.env`  | `APP_KEY`                                    | Required secret used by AdonisJS. Generate a private key for each environment.                                 |
-| `apps/backend/.env`  | `HOST`, `PORT`, `APP_URL`                    | Backend bind address and application URL. Defaults are `localhost`, `3333`, and `http://localhost:3333`.       |
-| `apps/backend/.env`  | `LOG_LEVEL`, `SESSION_DRIVER`, `CORS_ORIGIN` | Logging, session storage, and optional allowed origins for cross-origin setups.                                |
-| `apps/frontend/.env` | `VITE_API_URL`                               | API base URL; defaults to `/api/v1` for the local proxy and same-origin deployment.                            |
-| `apps/frontend/.env` | `VITE_CLERK_PUBLISHABLE_KEY`                 | Optional key for the retained Clerk example under `/clerk`; local AdonisJS authentication does not require it. |
+| File                 | Setting                                      | Purpose                                                                                                       |
+| -------------------- | -------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
+| `apps/backend/.env`  | `APP_KEY`                                    | Required secret used by AdonisJS. Generate a private key for each environment.                                |
+| `apps/backend/.env`  | `HOST`, `PORT`, `APP_URL`                    | Backend bind address and application URL. Defaults are `localhost`, `3333`, and `http://localhost:3333`.      |
+| `apps/backend/.env`  | `LOG_LEVEL`, `SESSION_DRIVER`, `CORS_ORIGIN` | Logging, session storage, and optional allowed origins for cross-origin setups.                               |
+| `apps/backend/.env`  | `CLERK_SECRET_KEY`                           | Optional Clerk Backend API key. Set it to enable Clerk sessions on protected API routes.                      |
+| `apps/backend/.env`  | `CLERK_AUTHORIZED_PARTIES`                   | Optional comma-separated frontend origins allowed to send Clerk session tokens. Set this in production.       |
+| `apps/frontend/.env` | `VITE_API_URL`                               | API base URL; defaults to `/api/v1` for the local proxy and same-origin deployment.                           |
+| `apps/frontend/.env` | `VITE_CLERK_PUBLISHABLE_KEY`                 | Optional Clerk frontend key. Pair it with the backend key to show Clerk sign-in and use Clerk for API access. |
 
-For deployment, copy `deploy/.env.example` to `deploy/.env` and follow the [deployment guide](docs/deployment.md). Never commit environment files, credentials, or local SQLite databases.
+With both Clerk keys configured, the sign-in and sign-up screens offer Clerk as an alternative. Clerk users are
+matched to existing local accounts only when their primary Clerk email is verified; otherwise a local SQLite user
+is created and linked by Clerk user ID. AdonisJS email/password sign-in remains available. For Docker deployments,
+set `CLERK_PUBLISHABLE_KEY`, `CLERK_SECRET_KEY`, and `CLERK_AUTHORIZED_PARTIES` in `deploy/.env`.
+
+For Docker deployment, use the installer below or follow the [manual deployment guide](docs/deployment.md). Never commit environment files, credentials, or local SQLite databases.
+
+### Docker one-line install
+
+On a host with Docker Engine and the Docker Compose plugin, run:
+
+```sh
+curl -fsSL https://raw.githubusercontent.com/OSpoon/adonisjs-shadcn-admin/main/deploy/install.sh | sh
+```
+
+The installer downloads the Compose files, generates a private `APP_KEY`, and starts the frontend and backend. It defaults to port `8080` and installs under `/opt/asa` as root or `~/asa` otherwise. The published GHCR images are public and can be pulled without logging in. Set `ASA_APP_URL` on the `sh` side of the pipe to configure a public site URL. See the [deployment guide](docs/deployment.md) for configuration and updates.
 
 VS Code project settings enable ESLint and Prettier integration and recommend the relevant extensions through `.vscode/`.
 

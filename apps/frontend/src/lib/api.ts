@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { useAuthStore } from '@/stores/auth-store'
 import type { ApiUser } from '@/lib/api-types'
+import { requestClerkToken } from '@/lib/clerk-session'
 import type { ChatUser } from '@/features/chats/data/chat-types'
 import type { Task } from '@/features/tasks/data/schema'
 import type { User } from '@/features/users/data/schema'
@@ -43,9 +44,12 @@ const api = axios.create({
   baseURL: import.meta.env.VITE_API_URL || '/api/v1',
 })
 
-api.interceptors.request.use((config) => {
-  const token = useAuthStore.getState().auth.accessToken
+api.interceptors.request.use(async (config) => {
+  const { auth } = useAuthStore.getState()
+  const token =
+    auth.provider === 'clerk' ? await requestClerkToken() : auth.accessToken
   if (token) config.headers.Authorization = `Bearer ${token}`
+  else delete config.headers.Authorization
   return config
 })
 
