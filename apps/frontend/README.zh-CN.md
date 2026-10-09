@@ -29,8 +29,8 @@ pnpm typecheck
 pnpm build
 ```
 
-运行 `pnpm format` 可应用项目配置的格式化工具。前端沿用上游 ESLint 规则和 Prettier 插件；后端沿用 AdonisJS 的 ESLint 与 Prettier 配置。
+运行 `pnpm format` 可应用项目配置的格式化工具。
 
-## 上游来源
+## 许可证
 
-导入的界面来自 `satnaing/shadcn-admin`，上游 commit 为 `e16c87f213a5ba5e45964e9b67c792105ec74d26`，采用 MIT License。详见 [LICENSE](./LICENSE) 和 [CHANGELOG.md](./CHANGELOG.md)。
+此目录包含依据 MIT License 发布的代码。详见 [LICENSE](./LICENSE)。

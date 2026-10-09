@@ -105,4 +105,4 @@ See [development and release instructions](docs/development.md) and the [deploym
 
 The [backend workspace](apps/backend/README.md) contains the AdonisJS API, SQLite migrations, seeders, and tests. The [frontend workspace](apps/frontend/README.md) contains the React dashboard based on satnaing/shadcn-admin. Docker assets live in `deploy/`, with project guides in `docs/`.
 
-Project-wide engineering rules are in [AGENTS.md](AGENTS.md), with backend and frontend addenda in their respective app directories. The imported frontend template's MIT license and source attribution are in [apps/frontend/LICENSE](apps/frontend/LICENSE) and [apps/frontend/README.md](apps/frontend/README.md).
+Project-wide engineering rules are in [AGENTS.md](AGENTS.md), with backend and frontend addenda in their respective app directories. Third-party license terms are recorded in [apps/frontend/LICENSE](apps/frontend/LICENSE).

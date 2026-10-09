@@ -29,8 +29,8 @@ pnpm typecheck
 pnpm build
 ```
 
-Use `pnpm format` to apply the configured formatters. The frontend keeps the upstream ESLint rules and Prettier plugins; the backend keeps the AdonisJS ESLint and Prettier configuration.
+Use `pnpm format` to apply the configured formatters.
 
-## Upstream
+## License
 
-The imported UI is from `satnaing/shadcn-admin` at commit `e16c87f213a5ba5e45964e9b67c792105ec74d26`, distributed under the MIT License. See [LICENSE](./LICENSE) and [CHANGELOG.md](./CHANGELOG.md).
+This frontend includes code distributed under the MIT License. See [LICENSE](./LICENSE).

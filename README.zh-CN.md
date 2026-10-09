@@ -108,4 +108,4 @@ VS Code 项目设置已启用 ESLint 和 Prettier 集成，并通过 `.vscode/` 
 
 [后端 workspace](apps/backend/README.zh-CN.md)包含 AdonisJS API、SQLite 迁移、seeders 和测试。[前端 workspace](apps/frontend/README.zh-CN.md)是基于 satnaing/shadcn-admin 的 React 管理界面。Docker 文件位于 `deploy/`，项目指南位于 `docs/`。
 
-项目级工程约束见 [AGENTS.md](AGENTS.md)，前后端目录还有各自的补充规则。导入的前端模板采用 MIT License，相关许可和来源说明见 [apps/frontend/LICENSE](apps/frontend/LICENSE) 与 [apps/frontend/README.md](apps/frontend/README.md)。
+项目级工程约束见 [AGENTS.md](AGENTS.md)，前后端目录还有各自的补充规则。第三方许可文本见 [apps/frontend/LICENSE](apps/frontend/LICENSE)。
