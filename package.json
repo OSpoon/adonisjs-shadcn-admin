@@ -1,6 +1,6 @@
 {
   "name": "asa",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "private": true,
   "type": "module",
   "description": "A batteries-included AdonisJS starter kit for building modern APIs with type-safe frontend integration",
