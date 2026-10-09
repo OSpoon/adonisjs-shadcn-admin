@@ -136,5 +136,5 @@ printf 'Starting adonisjs-shadcn-admin...\n'
 run_docker compose --env-file .env -f compose.yml up -d
 run_docker compose --env-file .env -f compose.yml ps
 
-printf '\nASA is running on port %s. Review %s/.env to set APP_URL and optional Clerk keys.\n' \
+printf '\nadonisjs-shadcn-admin is running on port %s. Review %s/.env to set APP_URL and optional Clerk keys.\n' \
   "$HTTP_PORT" "$INSTALL_DIR"
