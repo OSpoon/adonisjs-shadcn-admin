@@ -21,6 +21,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       CI: 'true'
+      NODE_ENV: production
       APP_KEY: 0123456789abcdef0123456789abcdef
       APP_URL: http://127.0.0.1:3334
       HOST: 127.0.0.1
