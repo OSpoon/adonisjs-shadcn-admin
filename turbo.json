@@ -35,7 +35,16 @@
     },
     "test": {
       "dependsOn": ["build"],
-      "cache": false
+      "cache": false,
+      "env": [
+        "NODE_ENV",
+        "APP_KEY",
+        "APP_URL",
+        "HOST",
+        "PORT",
+        "LOG_LEVEL",
+        "SESSION_DRIVER"
+      ]
     },
     "lint:check": {
       "dependsOn": ["^build"],
