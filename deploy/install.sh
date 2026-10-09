@@ -15,7 +15,7 @@ fi
 RAW_BASE="https://raw.githubusercontent.com/$REPOSITORY/$CONFIG_REF/deploy"
 
 fail() {
-  printf 'ASA installer: %s\n' "$1" >&2
+  printf 'adonisjs-shadcn-admin installer: %s\n' "$1" >&2
   exit 1
 }
 
@@ -89,7 +89,7 @@ TEMP_DIR=$(mktemp -d)
 trap 'rm -rf "$TEMP_DIR"' 0
 trap 'exit 1' HUP INT TERM
 
-printf 'Downloading ASA Compose configuration...\n'
+printf 'Downloading adonisjs-shadcn-admin Compose configuration...\n'
 fetch_file "$RAW_BASE/compose.yml" "$TEMP_DIR/compose.yml" ||
   fail 'Could not download deploy/compose.yml from GitHub.'
 fetch_file "$RAW_BASE/.env.example" "$TEMP_DIR/.env.example" ||
@@ -121,10 +121,10 @@ fi
 chmod 600 "$INSTALL_DIR/.env"
 
 cd "$INSTALL_DIR"
-printf 'Pulling ASA images...\n'
+printf 'Pulling adonisjs-shadcn-admin images...\n'
 if ! run_docker compose --env-file .env -f compose.yml pull; then
   cat >&2 <<EOF
-ASA images could not be pulled. If the GHCR packages are private, authenticate first:
+adonisjs-shadcn-admin images could not be pulled. If the GHCR packages are private, authenticate first:
   docker login ghcr.io -u YOUR_GITHUB_USERNAME
 Use a GitHub token with read:packages permission, then rerun this installer.
 The Compose files and .env were kept in: $INSTALL_DIR
@@ -132,7 +132,7 @@ EOF
   exit 1
 fi
 
-printf 'Starting ASA...\n'
+printf 'Starting adonisjs-shadcn-admin...\n'
 run_docker compose --env-file .env -f compose.yml up -d
 run_docker compose --env-file .env -f compose.yml ps
 
