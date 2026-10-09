@@ -50,7 +50,16 @@
     },
     "typecheck": {
       "dependsOn": ["^build"],
-      "outputs": []
+      "outputs": [],
+      "env": [
+        "NODE_ENV",
+        "APP_KEY",
+        "APP_URL",
+        "HOST",
+        "PORT",
+        "LOG_LEVEL",
+        "SESSION_DRIVER"
+      ]
     }
   }
 }
