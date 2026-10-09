@@ -1,0 +1,34 @@
+# Frontend
+
+React admin dashboard based on [satnaing/shadcn-admin](https://github.com/satnaing/shadcn-admin), integrated into this pnpm/Turborepo workspace.
+
+The upstream dashboard pages, shadcn/ui components, themes, navigation, tables, settings, error pages, demo data, and optional Clerk example are retained. Local AdonisJS API endpoints back authentication, profile, tasks, directory users, integrations, chats, dashboard data, and account preferences. The `/clerk` example is optional and requires a Clerk publishable key; other template examples may continue to use static or local demo content.
+
+## Development
+
+From the repository root:
+
+```bash
+pnpm install
+pnpm --filter @asa/backend db:migrate
+pnpm dev
+```
+
+Vite runs at `http://localhost:5173` and proxies `/api` to the AdonisJS server at `http://localhost:3333`. Create an account from `/sign-up`; user records and access tokens are stored through the backend's SQLite database.
+
+Set `VITE_API_URL` in `apps/frontend/.env` to override the API base URL. The default `/api/v1` works with the local Vite proxy and with deployments that serve the API under the same origin. The optional Clerk demo remains at `/clerk`; configure `VITE_CLERK_PUBLISHABLE_KEY` to use it.
+
+## Workspace checks
+
+```bash
+pnpm lint:check
+pnpm format:check
+pnpm typecheck
+pnpm build
+```
+
+Use `pnpm format` to apply the configured formatters. The frontend keeps the upstream ESLint rules and Prettier plugins; the backend keeps the AdonisJS ESLint and Prettier configuration.
+
+## Upstream
+
+The imported UI is from `satnaing/shadcn-admin` at commit `e16c87f213a5ba5e45964e9b67c792105ec74d26`, distributed under the MIT License. See [LICENSE](./LICENSE) and [CHANGELOG.md](./CHANGELOG.md).
