@@ -1,5 +1,7 @@
 # Deployment
 
+[English](deployment.md) | [简体中文](deployment.zh-CN.md)
+
 The repository provides a Docker Compose deployment for a single backend
 replica and a static frontend. The backend uses SQLite, so the deployment
 mounts a named volume at `/app/tmp` and runs database migrations at startup.

@@ -1,5 +1,7 @@
 # Frontend
 
+[English](README.md) | [简体中文](README.zh-CN.md)
+
 React admin dashboard based on [satnaing/shadcn-admin](https://github.com/satnaing/shadcn-admin) in the pnpm/Turborepo workspace.
 
 The dashboard provides pages for profile, tasks, directory users, integrations, chats, dashboard data, and account preferences, backed by the local AdonisJS API. Native AdonisJS sign-in is available by default. Clerk is an optional second provider configured with a frontend publishable key and backend secret key. The `/clerk` routes provide the Clerk management screens, and Clerk login also authenticates the main dashboard APIs. The Docker image reads the publishable key at container startup.

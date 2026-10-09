@@ -1,5 +1,7 @@
 # Backend
 
+[English](README.md) | [简体中文](README.zh-CN.md)
+
 AdonisJS API used by the React admin frontend. It provides authentication and the dashboard data APIs, with SQLite persistence through Lucid migrations.
 
 For the full project setup, start with the [root README](../../README.md) and [development guide](../../docs/development.md). Backend-specific rules are in [AGENTS.md](AGENTS.md).

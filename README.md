@@ -1,5 +1,7 @@
 # adonisjs-shadcn-admin
 
+[English](README.md) | [简体中文](README.zh-CN.md)
+
 A full-stack admin starter that pairs the [shadcn-admin](https://github.com/satnaing/shadcn-admin) React dashboard with an AdonisJS API and SQLite. The project is a pnpm workspace managed with Turborepo.
 
 ## Features

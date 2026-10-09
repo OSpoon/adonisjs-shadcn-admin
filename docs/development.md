@@ -1,5 +1,7 @@
 # Development
 
+[English](development.md) | [简体中文](development.zh-CN.md)
+
 ## Requirements
 
 - Node.js `24.15.0` (also recorded in `.nvmrc`)
